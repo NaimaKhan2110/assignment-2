@@ -1,0 +1,11 @@
+<!-- File: events/templates/events/event_form.html -->
+{% extends 'events/base.html' %}
+{% block title %}{% if event %}Edit Event{% else %}Create Event{% endif %}{% endblock %}
+{% block content %}
+  <h2>{% if event %}Edit Event{% else %}Create New Event{% endif %}</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">{% if event %}Update{% else %}Create{% endif %}</button>
+  </form>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'events/base.html' %}
+
+{% block title %}My Dashboard{% endblock %}
+
+{% block content %}
+  <h2>My Dashboard</h2>
+  <h3>My RSVP'd Events</h3>
+  
+  {% if events %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Date</th>
+          <th>Category</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for event in events %}
+        <tr>
+          <td>{{ event.title }}</td>
+          <td>{{ event.date }}</td>
+          <td>{{ event.get_category_display }}</td>
+          <td>
+            <a href="{% url 'event_detail' event.id %}" class="btn btn-info btn-sm">View</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>You haven't RSVP'd to any events yet. <a href="{% url 'event_list' %}">Browse events and RSVP now!</a></p>
+  {% endif %}
+{% endblock %}

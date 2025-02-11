@@ -1,0 +1,16 @@
+<!-- File: events/templates/events/activation_email.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Activate Your Account</title>
+</head>
+<body>
+  <p>Hi {{ user.username }},</p>
+  <p>Thank you for signing up. Please click the link below to activate your account:</p>
+  <p><a href="{{ activation_link }}">Activate My Account</a></p>
+  <p>If the link above doesn't work, copy and paste the following URL into your browser:</p>
+  <p>{{ activation_link }}</p>
+  <p>Thank you!</p>
+</body>
+</html>

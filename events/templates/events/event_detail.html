@@ -1,0 +1,49 @@
+{% extends 'events/base.html' %}
+{% load static %}
+{% load group_filters %}
+
+{% block title %}Event Detail{% endblock %}
+
+{% block content %}
+  <h2>{{ event.title }}</h2>
+  
+  {# Display the event image if available #}
+  {% if event.image %}
+    <img src="{{ event.image.url }}" alt="{{ event.title }}" class="img-fluid" style="max-width:100%; height:auto;">
+  {% endif %}
+
+  <p><strong>Date:</strong> {{ event.date }}</p>
+  <p><strong>Category:</strong> {{ event.get_category_display }}</p>
+  <p>{{ event.description }}</p>
+
+  {% if user.is_authenticated %}
+    {# Show RSVP option only for users who are NOT superuser, Admin, or Organizer #}
+    {% if not user.is_superuser and not user|has_group:"Admin" and not user|has_group:"Organizer" %}
+      {% if user in event.rsvps.all %}
+        <p>You have already RSVP'd to this event.</p>
+      {% else %}
+        <form method="POST" action="{% url 'rsvp_event' event.id %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-primary">RSVP to this event</button>
+        </form>
+      {% endif %}
+    {% endif %}
+  {% endif %}
+
+  {# For admins and organizers, show the list of participants with delete option (admins only) #}
+  {% if request.user.is_superuser or request.user|has_group:"Admin" or request.user|has_group:"Organizer" %}
+    <h3>Participants who joined this event:</h3>
+    <ul>
+      {% for participant in rsvp_users %}
+        <li>
+          {{ participant.username }} - {{ participant.email }}
+          {% if request.user.is_superuser or request.user|has_group:"Admin" %}
+            <a href="{% url 'delete_participant' participant.id %}" class="btn btn-sm btn-danger">Delete</a>
+          {% endif %}
+        </li>
+      {% empty %}
+        <li>No participants have joined this event yet.</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'events/base.html' %}
+{% load static %}
+
+{% block title %}Organizer Dashboard{% endblock %}
+
+{% block content %}
+  <h2>Organizer Dashboard</h2>
+  <p>Welcome, {{ request.user.username }}!</p>
+  
+  <h3>Your Events</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Date</th>
+        <th>Category</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for event in events %}
+      <tr>
+        <td>{{ event.title }}</td>
+        <td>{{ event.date }}</td>
+        <td>{{ event.get_category_display }}</td>
+        <td>
+          <div class="btn-group" role="group">
+            <a href="{% url 'event_detail' event.id %}" class="btn btn-info btn-sm">View</a>
+            <a href="{% url 'event_edit' event.id %}" class="btn btn-sm btn-primary">Edit</a>
+            <a href="{% url 'event_delete' event.id %}" class="btn btn-sm btn-danger">Delete</a>
+          </div>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="4">No events found.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a href="{% url 'event_create' %}" class="btn btn-success">Create New Event</a>
+{% endblock %}

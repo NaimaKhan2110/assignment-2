@@ -1,0 +1,8 @@
+<!-- File: events/templates/events/rsvp_confirmation.html -->
+{% extends 'events/base.html' %}
+{% block title %}RSVP Confirmation{% endblock %}
+{% block content %}
+  <h2>RSVP Confirmation</h2>
+  <p>Your RSVP has been recorded. A confirmation email has been sent to your email address.</p>
+  <a href="{% url 'event_list' %}" class="btn btn-primary">Back to Events</a>
+{% endblock %}
