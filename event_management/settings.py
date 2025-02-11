@@ -8,7 +8,8 @@ SECRET_KEY = 'your-secret-key'  # Replace with your actual secret key
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+CSRD_TRUSTED_ORIGIN = ['https://*.onrender.com','http://127.0.0.1:8000']
 
 # Application definition
 INSTALLED_APPS = [
