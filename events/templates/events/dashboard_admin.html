@@ -9,8 +9,8 @@
   <p>Welcome, {{ request.user.username }}!</p>
 
   <!-- All Events Section -->
-  <h3>All Events</h3>
-  <table class="table">
+  <h3 class="mt-4">All Events</h3>
+  <table class="table table-striped">
     <thead>
       <tr>
         <th>Title</th>
@@ -27,26 +27,23 @@
         <td>{{ event.get_category_display }}</td>
         <td>
           <div class="btn-group" role="group">
-            <!-- View Button -->
             <a href="{% url 'event_detail' event.id %}" class="btn btn-sm btn-info">View</a>
-            <!-- Edit Button -->
             <a href="{% url 'event_edit' event.id %}" class="btn btn-sm btn-primary">Edit</a>
-            <!-- Delete Button -->
             <a href="{% url 'event_delete' event.id %}" class="btn btn-sm btn-danger">Delete</a>
           </div>
         </td>
       </tr>
       {% empty %}
       <tr>
-        <td colspan="4">No events found.</td>
+        <td colspan="4" class="text-center text-muted">No events found.</td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
 
   <!-- All Users Section -->
-  <h3>All Users</h3>
-  <table class="table">
+  <h3 class="mt-4">All Users</h3>
+  <table class="table table-striped">
     <thead>
       <tr>
         <th>Username</th>
@@ -66,22 +63,29 @@
           {% endfor %}
         </td>
         <td>
-          <a href="{% url 'change_user_role' u.id %}" class="btn btn-sm btn-warning">Change Role</a>
-          {% if not u.is_superuser and not u|has_group:"Admin" and not u|has_group:"Organizer" %}
-            <a href="{% url 'delete_participant' u.id %}" class="btn btn-sm btn-danger">Delete</a>
+          {% if u.id != request.user.id %}
+            <a href="{% url 'change_user_role' u.id 'participant' %}" class="btn btn-sm btn-warning">Make Participant</a>
+            <a href="{% url 'change_user_role' u.id 'organizer' %}" class="btn btn-sm btn-secondary">Make Organizer</a>
+            <a href="{% url 'delete_user' u.id %}" class="btn btn-sm btn-danger">Delete</a>
+          {% else %}
+            <span class="text-muted">Your Role</span>
           {% endif %}
         </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="4" class="text-center text-muted">No users found.</td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
 
   <!-- Group Management Section -->
-  <h3>Group Management</h3>
+  <h3 class="mt-4">Group Management</h3>
   <p>
     <a href="{% url 'create_group' %}" class="btn btn-primary">Create New Group</a>
   </p>
-  <table class="table">
+  <table class="table table-striped">
     <thead>
       <tr>
         <th>Group Name</th>
@@ -93,12 +97,15 @@
       <tr>
         <td>{{ group.name }}</td>
         <td>
+          <!-- View Members Button -->
+          <a href="{% url 'group_detail' group.id %}" class="btn btn-sm btn-info">View Members</a>
+          <!-- Delete Group Button -->
           <a href="{% url 'delete_group' group.id %}" class="btn btn-sm btn-danger">Delete Group</a>
         </td>
       </tr>
       {% empty %}
       <tr>
-        <td colspan="2">No groups available.</td>
+        <td colspan="2" class="text-center text-muted">No groups available.</td>
       </tr>
       {% endfor %}
     </tbody>

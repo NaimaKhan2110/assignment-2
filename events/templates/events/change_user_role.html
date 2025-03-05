@@ -1,17 +1,27 @@
 {% extends 'events/base.html' %}
 {% block title %}Change User Role{% endblock %}
+
 {% block content %}
-  <h2>Change Role for {{ user.username }}</h2>
-  <form method="post">
-    {% csrf_token %}
-    <div class="form-group">
-      <label for="role">New Role:</label>
-      <select name="role" id="role" class="form-control">
-        <option value="Admin">Admin</option>
-        <option value="Organizer">Organizer</option>
-        <option value="Participant">Participant</option>
-      </select>
-    </div>
-    <button type="submit" class="btn btn-primary">Change Role</button>
-  </form>
+<div class="container">
+    <h2 class="text-center mb-4">Change User Role</h2>
+
+    <form method="post" class="p-4 border rounded bg-light shadow">
+        {% csrf_token %}
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Current Role:</strong> {% for group in user.groups.all %}{{ group.name }}{% endfor %}</p>
+
+        <label for="role">New Role:</label>
+        <select name="role" class="form-control">
+            <option value="Admin">Admin</option>
+            <option value="Organizer">Organizer</option>
+            <option value="Participant">Participant</option>
+        </select>
+
+        <button type="submit" class="btn btn-primary mt-3">Update Role</button>
+    </form>
+
+    <p class="text-center mt-3">
+        <a href="{% url 'admin_dashboard' %}" class="btn btn-secondary">Back to Admin Dashboard</a>
+    </p>
+</div>
 {% endblock %}

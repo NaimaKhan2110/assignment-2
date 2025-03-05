@@ -1,0 +1,109 @@
+/* File: static/css/styles.css */
+
+/* Global Styles */
+body {
+    background-color: #f8f9fa; /* Light gray background */
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Container adjustments */
+  .container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  
+  /* Navigation Bar */
+  .navbar {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e3e3e3;
+  }
+  
+  .navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+  
+  .navbar-nav .nav-link {
+    color: #333 !important;
+    margin-right: 15px;
+  }
+  
+  .navbar-nav .nav-link:hover {
+    color: #007bff !important;
+  }
+  
+  /* Headings */
+  h2, h3 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  /* Forms */
+  form {
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #e3e3e3;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  form .form-group label {
+    font-weight: 500;
+  }
+  
+  form button.btn {
+    min-width: 120px;
+  }
+  
+  /* Alerts */
+  .alert {
+    margin-top: 15px;
+  }
+  
+  /* Cards (for event listings) */
+  .card {
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-img-top {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+  
+  /* Tables */
+  .table {
+    margin-bottom: 30px;
+  }
+  
+  .table th, .table td {
+    vertical-align: middle;
+  }
+  
+  /* Buttons */
+  .btn {
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+  
+  /* Responsive images */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Footer (if needed) */
+  footer {
+    background-color: #343a40;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 30px;
+  }
+  

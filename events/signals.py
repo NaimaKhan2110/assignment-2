@@ -1,6 +1,7 @@
 from django.db.models.signals import post_save, m2m_changed
 from django.dispatch import receiver
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+User = get_user_model()  # Use the custom user model
 from django.core.mail import send_mail
 from django.conf import settings
 from django.utils.http import urlsafe_base64_encode
@@ -34,7 +35,6 @@ def send_rsvp_confirmation_email(sender, instance, action, pk_set, **kwargs):
             try:
                 user = User.objects.get(pk=user_id)
                 subject = f"RSVP Confirmation for {instance.title}"
-                # Format the event's date to include the exact time.
                 event_time = instance.date.strftime('%Y-%m-%d %H:%M:%S')
                 message = (
                     f"Hi {user.username},\n\n"

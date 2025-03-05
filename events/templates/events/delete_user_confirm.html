@@ -1,0 +1,17 @@
+{% extends 'events/base.html' %}
+{% load static %}
+
+{% block title %}Confirm User Deletion{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2 class="text-danger">Confirm User Deletion</h2>
+  <p class="lead">Warning: This action <strong>cannot</strong> be undone.</p>
+  <p>Are you sure you want to delete user <strong>{{ object.username }}</strong>?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Yes, delete user</button>
+    <a href="{% url 'admin_dashboard' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}

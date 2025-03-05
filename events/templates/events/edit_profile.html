@@ -1,0 +1,39 @@
+{% extends 'events/base.html' %}
+{% block title %}Edit Profile{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h2 class="text-center mb-4">Edit Your Profile</h2>
+
+    <!-- Profile Picture Preview -->
+    {% if user.profile_picture %}
+      <div class="text-center mb-4">
+        <img src="{{ user.profile_picture.url }}" alt="Profile Picture" class="rounded-circle" width="120">
+      </div>
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data" class="p-4 border rounded bg-light shadow">
+      {% csrf_token %}
+      
+      {% for field in form %}
+        <div class="form-group">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% if field.help_text %}
+            <small class="form-text text-muted">{{ field.help_text }}</small>
+          {% endif %}
+          {% for error in field.errors %}
+            <div class="text-danger">{{ error }}</div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+      
+      <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+    </form>
+
+    <div class="text-center mt-3">
+      <a href="{% url 'profile' %}" class="btn btn-secondary">Back to Profile</a>
+      <a href="{% url 'change_password' %}" class="btn btn-link">Change Password</a>
+    </div>
+  </div>
+{% endblock %}

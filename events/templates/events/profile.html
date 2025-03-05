@@ -1,0 +1,40 @@
+{% extends 'events/base.html' %}
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card shadow">
+          <div class="card-header text-center bg-primary text-white">
+            <h3>My Profile</h3>
+          </div>
+          <div class="card-body text-center">
+            <!-- Profile Picture -->
+            <img src="{{ user.profile_picture.url }}" class="rounded-circle mb-3" width="150" height="150" alt="Profile Picture">
+
+            <!-- User Details -->
+            <h4 class="mb-2">{{ user.username }}</h4>
+            <p class="text-muted">{{ user.email }}</p>
+
+            <hr>
+
+            <p><strong>First Name:</strong> {{ user.first_name }}</p>
+            <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+            <p><strong>Phone Number:</strong> {{ user.phone_number|default:"Not provided" }}</p>
+
+            <!-- Profile Actions -->
+            <div class="mt-4">
+              <a href="{% url 'profile_edit' %}" class="btn btn-warning">Edit Profile</a>
+              <a href="{% url 'change_password' %}" class="btn btn-danger">Change Password</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-3">
+          <a href="{% url 'event_list' %}" class="btn btn-secondary">Back to Events</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -39,8 +39,7 @@ ROOT_URLCONF = 'event_management.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # Look for templates in the events/templates folder:
-        'DIRS': [os.path.join(BASE_DIR, 'events', 'templates')],
+        'DIRS': [],  # Add any global template directories here if needed.
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -52,6 +51,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'event_management.wsgi.application'
 
@@ -72,6 +72,8 @@ AUTH_PASSWORD_VALIDATORS = [
         }
     },
 ]
+AUTH_USER_MODEL = 'events.CustomUser'
+
 
 
 # Internationalization
